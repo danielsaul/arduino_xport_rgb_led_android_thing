@@ -70,13 +70,13 @@ uint16_t ret;
 
     if(flash){
         delay(250);
-        analogWrite(10, 0);
-        analogWrite(3, 0);
-        analogWrite(11, 0);
+        analogWrite(10, 255);
+        analogWrite(3, 255);
+        analogWrite(11, 255);
         delay(1000);
-        analogWrite(10, EEPROM.read(RED_EADDR));
-        analogWrite(3, EEPROM.read(GREEN_EADDR));
-        analogWrite(11, EEPROM.read(BLUE_EADDR));
+        analogWrite(10, 255 - EEPROM.read(RED_EADDR));
+        analogWrite(3, 255 - EEPROM.read(GREEN_EADDR));
+        analogWrite(11, 255 - EEPROM.read(BLUE_EADDR));
     }
 
 }
@@ -171,9 +171,9 @@ void changeLED(void) {
       EEPROM.write(GREEN_EADDR, green);  
       EEPROM.write(BLUE_EADDR, blue);  
        
-      analogWrite(10, red);   // Write current values to LED pins
-      analogWrite(3, green); 
-      analogWrite(11, blue);  
+      analogWrite(10, 255 - red);   // Write current values to LED pins
+      analogWrite(3, 255 - green); 
+      analogWrite(11, 255 - blue);  
   }
 
     // Turn off
@@ -181,9 +181,9 @@ void changeLED(void) {
     if (found) {
       setrequest = true;
 
-      analogWrite(10, 0);
-      analogWrite(3, 0);
-      analogWrite(11, 0);
+      analogWrite(10, 255);
+      analogWrite(3, 255);
+      analogWrite(11, 255);
 
       lcd.setCursor(0,0);
       lcd.print("Turned off.     ");
@@ -201,15 +201,15 @@ void changeLED(void) {
         delay(100);
         lcd.setCursor(0,0);
         lcd.print("                ");
-        analogWrite(10, 0);
-        analogWrite(3, 0);
-        analogWrite(11, 0);
+        analogWrite(10, 255);
+        analogWrite(3, 255);
+        analogWrite(11, 255);
         delay(100);
         lcd.setCursor(0,0);
         lcd.print("Blinking.       ");
-        analogWrite(10, EEPROM.read(RED_EADDR));
-        analogWrite(3, EEPROM.read(GREEN_EADDR));
-        analogWrite(11, EEPROM.read(BLUE_EADDR));
+        analogWrite(10, 255 - EEPROM.read(RED_EADDR));
+        analogWrite(3, 255 - EEPROM.read(GREEN_EADDR));
+        analogWrite(11, 255 - EEPROM.read(BLUE_EADDR));
         }
         lcd.setCursor(0,0);
         lcd.print("                ");
